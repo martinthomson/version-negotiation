@@ -5,8 +5,8 @@
 QUIC Working Group                                           D. Schinazi
 Internet-Draft                                                Google LLC
 Intended status: Informational                               E. Rescorla
-Expires: 19 July 2021                                            Mozilla
-                                                         15 January 2021
+Expires: 25 July 2021                                            Mozilla
+                                                         21 January 2021
 
 
                 Compatible Version Negotiation for QUIC
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 19 July 2021.
+   This Internet-Draft will expire on 25 July 2021.
 
 Copyright Notice
 
@@ -132,14 +132,6 @@ Table of Contents
    part of the same connection as the VN packet and the packets with the
    negotiated version.
 
-   For the duration of the version negotiation process, clients MUST use
-   the same 5-tuple (source and destination IP addresses and UDP port
-   numbers).  During that time, clients MUST also use the same
-   Destination Connection ID, except if the server explicitly instructs
-   the client to use a different Destination Connection ID.  This allows
-   load balancers to ensure that packets for a given connection are
-   routed to the same server.
-
 3.  Compatible Versions
 
    If A and B are two distinct versions of QUIC, A is said to be
@@ -214,11 +206,18 @@ Table of Contents
    supported version and sends a new first flight with that version - we
    refer to this version as the "negotiated version".
 
-   This will allow the endpoints to establish a connection using the
-   negotiated version.  The handshake of the negotiated version will
-   exchange handshake version information (see Section 5) required to
-   ensure that VN was genuine, i.e. that no attacker injected packets in
-   order to influence the VN process, see Section 6.
+   When the client sends its new first flight, it SHOULD use the same
+   5-tuple (source and destination IP addresses and UDP port numbers)
+   and the same Destination Connection ID as its original first flight.
+   This will increase the likelihood of both first flights reaching the
+   same server.
+
+   The new first flight will allow the endpoints to establish a
+   connection using the negotiated version.  The handshake of the
+   negotiated version will exchange handshake version information (see
+   Section 5) required to ensure that VN was genuine, i.e. that no
+   attacker injected packets in order to influence the VN process, see
+   Section 6.
 
 4.2.  Compatible Version Negotiation
 
@@ -240,6 +239,14 @@ Table of Contents
    If any of these operations fail, the server will use the original
    version if it supports it, and if it doesn't then the server will
    perform incompatible version negotiation instead, see Section 4.1.
+
+   For the duration of the compatible version negotiation process,
+   clients MUST use the same 5-tuple (source and destination IP
+   addresses and UDP port numbers).  During that time, clients MUST also
+   use the same Destination Connection ID, except if the server
+   explicitly instructs the client to use a different Destination
+   Connection ID.  This allows load balancers to ensure that packets for
+   a given connection are routed to the same server.
 
 5.  Handshake Version Information
 
