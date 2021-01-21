@@ -937,8 +937,8 @@ the negotiation can take place without incurring an extra round trip.<a href="#s
 <nav class="toc"><ul class="toc ulEmpty compact">
 <li class="toc ulEmpty compact" id="section-toc.1-1.1">
             <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="xref">1</a>.  <a href="#name-introduction" class="xref">Introduction</a><a href="#section-toc.1-1.1.1" class="pilcrow">¶</a></p>
-<ul class="toc ulEmpty compact">
-<li class="toc ulEmpty compact" id="section-toc.1-1.1.2.1">
+<ul class="ulEmpty toc compact">
+<li class="ulEmpty toc compact" id="section-toc.1-1.1.2.1">
                 <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="xref">1.1</a>.  <a href="#name-conventions-and-definitions" class="xref">Conventions and Definitions</a><a href="#section-toc.1-1.1.2.1.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
@@ -951,11 +951,11 @@ the negotiation can take place without incurring an extra round trip.<a href="#s
 </li>
           <li class="toc ulEmpty compact" id="section-toc.1-1.4">
             <p id="section-toc.1-1.4.1"><a href="#section-4" class="xref">4</a>.  <a href="#name-version-negotiation-mechani" class="xref">Version Negotiation Mechanism</a><a href="#section-toc.1-1.4.1" class="pilcrow">¶</a></p>
-<ul class="toc ulEmpty compact">
-<li class="toc ulEmpty compact" id="section-toc.1-1.4.2.1">
+<ul class="ulEmpty toc compact">
+<li class="ulEmpty toc compact" id="section-toc.1-1.4.2.1">
                 <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="xref">4.1</a>.  <a href="#name-incompatible-version-negoti" class="xref">Incompatible Version Negotiation</a><a href="#section-toc.1-1.4.2.1.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="toc ulEmpty compact" id="section-toc.1-1.4.2.2">
+              <li class="ulEmpty toc compact" id="section-toc.1-1.4.2.2">
                 <p id="section-toc.1-1.4.2.2.1"><a href="#section-4.2" class="xref">4.2</a>.  <a href="#name-compatible-version-negotiat" class="xref">Compatible Version Negotiation</a><a href="#section-toc.1-1.4.2.2.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
@@ -986,11 +986,11 @@ the negotiation can take place without incurring an extra round trip.<a href="#s
 </li>
           <li class="toc ulEmpty compact" id="section-toc.1-1.13">
             <p id="section-toc.1-1.13.1"><a href="#section-13" class="xref">13</a>. <a href="#name-iana-considerations" class="xref">IANA Considerations</a><a href="#section-toc.1-1.13.1" class="pilcrow">¶</a></p>
-<ul class="toc ulEmpty compact">
-<li class="toc ulEmpty compact" id="section-toc.1-1.13.2.1">
+<ul class="ulEmpty toc compact">
+<li class="ulEmpty toc compact" id="section-toc.1-1.13.2.1">
                 <p id="section-toc.1-1.13.2.1.1"><a href="#section-13.1" class="xref">13.1</a>.  <a href="#name-quic-transport-parameter" class="xref">QUIC Transport Parameter</a><a href="#section-toc.1-1.13.2.1.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="toc ulEmpty compact" id="section-toc.1-1.13.2.2">
+              <li class="ulEmpty toc compact" id="section-toc.1-1.13.2.2">
                 <p id="section-toc.1-1.13.2.2.1"><a href="#section-13.2" class="xref">13.2</a>.  <a href="#name-quic-transport-error-code" class="xref">QUIC Transport Error Code</a><a href="#section-toc.1-1.13.2.2.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
@@ -1311,6 +1311,10 @@ to start enforcing that the new version is present in <code>Received Negotiation
 Versions</code>. This opens connections to version downgrades during the upgrade
 window, since those could be due to clients communicating with both upgraded
 and non-upgraded servers.<a href="#section-6-4" class="pilcrow">¶</a></p>
+<p id="section-6-5">If an endpoint receives its peer's Handshake Version Information and fails to
+parse it (for example, if it is too short), then the endpoint MUST close the
+connection. If the connection was using QUIC version 1, it MUST be closed with
+a transport error of type <code>VERSION_NEGOTIATION_ERROR</code>.<a href="#section-6-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="supported-versions">
