@@ -5,8 +5,8 @@
 QUIC Working Group                                           D. Schinazi
 Internet-Draft                                                Google LLC
 Intended status: Informational                               E. Rescorla
-Expires: 25 July 2021                                            Mozilla
-                                                         21 January 2021
+Expires: 26 July 2021                                            Mozilla
+                                                         22 January 2021
 
 
                 Compatible Version Negotiation for QUIC
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 25 July 2021.
+   This Internet-Draft will expire on 26 July 2021.
 
 Copyright Notice
 
@@ -236,9 +236,11 @@ Table of Contents
    present in the client's compatible versions, unless it is the
    original version.
 
-   If any of these operations fail, the server will use the original
-   version if it supports it, and if it doesn't then the server will
-   perform incompatible version negotiation instead, see Section 4.1.
+   If any of these operations fail (except parsing and validation
+   failures which are discussed in Section 6), the server will use the
+   original version if it supports it, and if it doesn't then the server
+   will perform incompatible version negotiation instead, see
+   Section 4.1.
 
    For the duration of the compatible version negotiation process,
    clients MUST use the same 5-tuple (source and destination IP
@@ -374,7 +376,7 @@ Table of Contents
    fails to parse it (for example, if it is too short), then the
    endpoint MUST close the connection.  If the connection was using QUIC
    version 1, it MUST be closed with a transport error of type
-   "VERSION_NEGOTIATION_ERROR".
+   "TRANSPORT_PARAMETER_ERROR".
 
 7.  Supported Versions
 
